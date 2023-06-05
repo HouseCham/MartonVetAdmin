@@ -13,9 +13,12 @@ func SetAllRoutes(app *fiber.App) {
 	app.Get("/editar_cliente/:id", controllers.VerClientesEditar)
 	app.Get("/ver_consultas", controllers.ConsultasVer)
 	app.Get("/registrar_consulta", controllers.ConsultasRegistrar)
+	app.Get("/eliminar_cliente/:id", controllers.VerClienteEliminar)
 	
 	app.Post("/insertar_cliente", controllers.InsertNewClient)
 
 	app.Put("/actualizar_cliente", controllers.UpdateClient)
+
+	app.Delete("/eliminar_cliente/:id", controllers.DeleteClient)
 }
 

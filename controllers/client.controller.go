@@ -149,6 +149,63 @@ func VerClientesEditar(c *fiber.Ctx) error {
 	})
 }
 
+// VerClientesEliminar is a function that renders the delete client page
+func VerClienteEliminar(c *fiber.Ctx) error {
+	clientId := c.Params("id")
+	if clientId == "" {
+		c.Status(fiber.StatusBadRequest)
+		return c.JSON(fiber.Map{
+			"mensaje": "No se ha especificado un id",
+		})
+	}
+	var client models.Client
+	clientIdInt, err := strconv.Atoi(clientId)
+	if err != nil {
+		c.Status(fiber.StatusBadRequest)
+		return c.JSON(fiber.Map{
+			"mensaje": "El id no es valido",
+		})
+	}
+	client.Id = clientIdInt
+	result := db.First(&client, clientId)
+	if result.Error != nil {
+		c.Status(fiber.StatusNotFound)
+		return c.JSON(fiber.Map{
+			"mensaje": "No se encontro el cliente",
+		})
+	}
+
+	return c.Render("eliminarCliente", fiber.Map{
+		"id": client.Id,
+		"nombre": client.Nombre,
+		"apellidoP": client.ApellidoP,
+		"apellidoM": client.ApellidoM,
+	})
+}
+
+// DeleteClient is a function that deletes a client from the database
+func DeleteClient(c *fiber.Ctx) error {
+	clientId := c.Params("id")
+	if clientId == "" {
+		c.Status(fiber.StatusBadRequest)
+		return c.JSON(fiber.Map{
+			"mensaje": "No se ha especificado un id",
+		})
+	}
+
+	result := db.Delete(&models.Client{}, clientId)
+	if result.Error != nil {
+		c.Status(fiber.StatusInternalServerError)
+		return c.JSON(fiber.Map{
+			"mensaje": "Hubo un error en el servidor",
+			"errores": result.Error.Error(),
+		})
+	}
+	return c.JSON(fiber.Map{
+		"mensaje": "Se ha eliminado el cliente",
+	})
+}
+
 func ShareDB(mainDB *gorm.DB) {
 	db = mainDB
 }
