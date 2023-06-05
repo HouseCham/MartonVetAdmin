@@ -41,7 +41,7 @@ Para comenzar con VetMate, sigue estos pasos:
 
 1. **Clonar el Repositorio**: Clona el repositorio de VetMate desde GitHub utilizando el siguiente comando:
 ```shell
-git clone https://github.com/tu-nombre-de-usuario/vetmate.git
+git clone https://github.com/HouseCham/MartonVetAdmin.git
 ```
 2. **Instalar Dependencias**: Navega al directorio del proyecto e instala las dependencias requeridas utilizando el gestor de paquetes que prefieras:
 ```shell
