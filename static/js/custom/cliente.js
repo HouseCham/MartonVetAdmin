@@ -36,14 +36,17 @@ btnRegistrar.addEventListener('click', (e) => {
         success: function (response) {
             Toastify({
                 text: "Cliente registrado correctamente",
-                duration: 3000,
+                duration: 2000,
                 gravity: "top", // Position: "top", "bottom", or "center"
                 positionLeft: false, // Position the toast on the left side
                 backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)", // Custom background color
                 stopOnFocus: true, // Stop timer when the toast is hovered over
               }).showToast();
             setInputBlank();
-            btnRegistrar.disabled = false;
+            setTimeout(function() {
+                btnRegistrar.disabled = false;
+                window.location.href = "./ver_clientes";
+            }, 2000);
         },
         error: function (error) {
             console.log(error);

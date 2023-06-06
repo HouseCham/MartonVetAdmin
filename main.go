@@ -25,7 +25,9 @@ func main() {
 	if err != nil {
 		panic("failed to connect database: " + err.Error())
 	}
+	
 	db.AutoMigrate(&models.Client{})
+	db.AutoMigrate(&models.Pet{})
 	
 	controllers.ShareDB(db)
 	

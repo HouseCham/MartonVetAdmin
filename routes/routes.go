@@ -14,6 +14,7 @@ func SetAllRoutes(app *fiber.App) {
 	app.Get("/ver_consultas", controllers.ConsultasVer)
 	app.Get("/registrar_consulta", controllers.ConsultasRegistrar)
 	app.Get("/eliminar_cliente/:id", controllers.VerClienteEliminar)
+	app.Get("/ver_mascotas/:id", controllers.MascotasVer)
 	
 	app.Post("/insertar_cliente", controllers.InsertNewClient)
 
